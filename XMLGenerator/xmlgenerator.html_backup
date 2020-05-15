@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <title>XML Generator - (s)FTP</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <link rel="stylesheet" href="css/xmlgenerator.css">
+    </header>
+    <body>
+        <H1>(s)FTP Binding XML Generator</H1>
+        <form action="">
+            <!-- <label for="bid">Binding Doc ID</label>
+            <input type="text" name="bid" id="bid" required> -->
+            <section class="itemGroups">
+                <h2>Project Details</h2>
+                <section class="items">                    
+                    <label for="project">Project Name</label>
+                    <input type="text" name="project" id="project" class="col-2" required>
+                    <label for="sender">Sender</label>
+                    <input type="text" name="sender" id="sender" class="col-2" required>
+                    <label for="receiver">Receiver</label>
+                    <input type="text" name="receiver" id="receiver" class="col-2" required>
+                    <label for="docType">Document Type</label>
+                    <input type="text" name="docType" id="docType" class="col-2" required>
+                </section>
+            </section>
+
+            <section class="itemGroups">
+                <h2>Connection</h2>
+                <section class="items">
+                    <label for="protocol">Protocol</label>
+                    <select name="protocol" id="protocol" class="col-3">
+                        <option value="sFTP">sFTP</option>
+                        <option value="FTP">FTP</option>
+                    </select>
+                    <label for="hostname">Hostname</label>
+                    <input type="text" name="hostname" id="hostname" class="col-3" required>
+                    <label for="port">Port</label>
+                    <input type="text" name="port" id="port" class="col-3" required>
+                    <label for="user">User</label>
+                    <input type="text" name="user" id="usuer"  class="col-3" required>
+                    <label for="password">Password</label>
+                    <input type="text" name="password" id="password" class="col-3" required>
+                    <label for="connectionTimeout">Connection Timeout</label>
+                    <input type="text" name="connectionTimeout" id="connectionTimeout" value="300" class="col-3" required>
+                    <label for="reconnectCount">Reconnect Count</label>
+                    <input type="text" name="reconnectCount" id="reconnectCount" value="3" class="col-3" required>
+                    <label for="reconnectInterval">Reconnect Interval</label>
+                    <input type="text" name="reconnectInterval" id="reconnectInterval" value="5" class="col-3" required>
+                </section>
+            </section>
+
+            <section class="itemGroups">
+                <h2>File</h2>
+                <section class="items">
+                    <label for="ftpDir">FTP Directory</label>
+                    <input type="text" name="ftpDir" id="ftpDir" class="col-2" required>
+                    <label for="remoteProcDir">Remote Processing Directory</label>
+                    <input type="text" name="remoteProcDir" id="remoteProcDir" class="col-2" placeholder="optional">
+                    <label for="localDownloadDir">Local Download Directory</label>
+                    <input type="text" name="localDownloadDir" id="localDownloadDir" class="col-2" required>
+                    <label for="fileName">File Name</label>
+                    <input type="text" name="fileName" id="fileName" value="*.*" class="col-2" required>
+                    <label for="archiveFlagLocal">Archive Local Flag</label>
+                    <select name="archiveFlagLocal" id="archiveFlagLocal" class="col-2">
+                        <option value="false">false</option>
+                        <option value="true">true</option>
+                    </select>
+                    <label for="archiveLocalDir">Archive Local Directory</label>
+                    <input type="text" name="archiveLocalDir" id="archiveLocalDir" class="col-2" placeholder="optional">
+                    <label for="largeFileCheck">Large File Check</label>
+                    <select name="largeFileCheck" id="largeFileCheck" class="col-2">
+                        <option value="false">false</option>
+                        <option value="true">true</option>
+                    </select>
+                    <label for="filesizeLimit">File Size Limit</label>
+                    <input type="text" name="filesizeLimit" id="filesizeLimit" class="col-2" placeholder="optional">
+                </section>
+            </section>
+
+            <section class="itemGroups">
+                <h2>Transport</h2>
+                <section class="items">
+                    </section>
+                    <label for="action">Archive Local Flag</label>
+                    <select name="action" id="action" class="col-5">
+                        <option value="MGET">MGET</option>
+                        <option value="GET">GET</option>
+                    </select>
+                    <label for="remoteFileAction">Archive Local Flag</label>
+                    <select name="remoteFileAction" id="remoteFileAction" class="col-5">
+                        <option value="DELETE">DELETE</option>
+                        <option value="KEEP">KEEP</option>
+                    </select>
+                    <label for="transferMode">Archive Local Flag</label>
+                    <select name="transferMode" id="transferMode" class="col-5">
+                        <option value="BINARY">BINARY</option>
+                        <option value="EDI">EDI</option>
+                    </select>
+                    <label for="transferType">Archive Local Flag</label>
+                    <select name="transferType" id="transferType" class="col-5">
+                        <option value="passive">passive</option>
+                        <option value="active">active</option>
+                    </select>
+                    <label for="encoding">Encoding</label>
+                    <input type="text" name="encoding" id="encoding" value="ISO8859_1" class="col-5" required>
+                </section>
+            </section>
+
+            <section class="itemGroups optional">
+                <h2>Callbacks</h2>
+                <section class="items">
+                    <label for="initial">Initial</label>
+                    <input type="text" name="initial" id="initial" placeholder="optional" class="col-1">
+                    <label for="preProcess">Pre-Process</label>
+                    <input type="text" name="preProcess" id="preProcess" placeholder="optional" class="col-1">
+                    <label for="postProcess">Post Process</label>
+                    <input type="text" name="postProcess" id="postProcess" placeholder="optional" class="col-1">
+                    <label for="finall">Final</label>
+                    <input type="text" name="finall" id="finall" placeholder="optional" class="col-1">
+                    <label for="error">Error</label>
+                    <input type="text" name="error" id="error" placeholder="optional" class="col-1">
+                    <label for="largeFile">Large File</label>
+                    <input type="text" name="largeFile" id="largeFile" placeholder="optional" class="col-1">
+                    <label for="postDirList">Post Directory List</label>
+                    <input type="text" name="postDirList" id="postDirList" placeholder="optional" class="col-1">
+                    <label for="postFileLoad">Post File Load</label>
+                    <input type="text" name="postFileLoad" id="postFileLoad" placeholder="optional" class="col-1">
+                </section>
+            </section>
+
+            <section class="itemGroups optional">
+                <h2>PGP</h2>
+                <section class="items">
+                    <label for="pgpFlag">pgpFlag</label>
+                    <select name="pgpFlag" id="pgpFlag">
+                        <option value="false">false</option>
+                        <option value="true">true</option>
+                    </select>
+                    <label for="type">Type</label>
+                    <input type="text" name="type" id="type" placeholder="optional">
+                    <label for="key">Key</label>
+                    <input type="text" name="key" id="key" placeholder="optional">
+                    <label for="pgpPassword">Password</label>
+                    <input type="text" name="pgpPassword" id="pgpPassword" placeholder="optional">
+                    <label for="alghorithm">Algorithm</label>
+                    <input type="text" name="alghorithm" id="alghorithm" placeholder="optional">
+                    <label for="secretKeyFile">Secret Key File</label>
+                    <input type="text" name="secretKeyFile" id="secretKeyFile" placeholder="optional">
+                    <label for="publicKeyFile">Public Key File</label>
+                    <input type="text" name="publicKeyFile" id="publicKeyFile" placeholder="optional">
+                </section>
+            </section>
+
+            <section class="itemGroups optional">
+                <h2>sFTP</h2>
+                <section class="items">
+                    <label for="privateKey">Private Key</label>
+                    <input type="text" name="privateKey" id="privateKey" placeholder="optional">
+                    <label for="privateKeyPassword">Private Key Password</label>
+                    <input type="text" name="privateKeyPassword" id="privateKeyPassword" placeholder="optional">
+                    <label for="knownHosts">Known Hosts</label>
+                    <input type="text" name="knownHosts" id="knownHosts" placeholder="optional">
+                    <label for="strictHostKeyChecking">StrictHostKeyChecking</label>
+                    <input type="text" name="strictHostKeyChecking" id="strictHostKeyChecking" placeholder="optional">
+                    <label for="httpProxy">HTTP Proxy</label>
+                    <select name="httpProxy" id="httpProxy">
+                        <option value="N">N</option>
+                        <option value="Y">Y</option>
+                    </select>
+                    <label for="socksProxy">Socks Proxy</label>
+                    <select name="socksProxy" id="socksProxy">
+                        <option value="N">N</option>
+                        <option value="Y">Y</option>
+                    </select>
+                </section>
+            </section>
+
+            <section class="itemGroups optional">
+                <h2>Counter</h2>
+                <section class="items">
+                    <label for="counter">Counter</label>
+                    <input type="text" name="counter" id="counter" placeholder="optional">
+                </section>
+            </section>
+
+            <section class="itemGroups">
+                <h2>Poller</h2>
+                <label for="applicationID">Application ID</label>
+                <input type="text" name="applicationID" id="applicationID" required>
+                <label for="enabledCron">Enabled Cron</label>
+                <select name="enabledCron" id="enabledCron">
+                    <option value="true">true</option>
+                    <option value="false">false</option>
+                </select>
+                <label for="clusterAware">Enabled Cron</label>
+                <select name="clusterAware" id="clusterAware">
+                    <option value="true">true</option>
+                    <option value="false">false</option>
+                </select>
+                <label for="clusterAwareScope">Enabled Cron</label>
+                <select name="clusterAwareScope" id="clusterAwareScope">
+                    <option value="GLOBAL">GLOBAL</option>
+                    <option value="LOCAL">LOCAL</option>
+                </select>
+                <label for="priority">Priority</label>
+                <input type="text" name="priority" id="priority" value="0">
+                <label for="serverRole">Server Role</label>
+                <input type="text" name="serverRole" id="serverRole" value="CL1" required>
+                <label for="groupName">Group Name</label>
+                <input type="text" name="groupName" id="groupName" required>
+            </section>
+
+
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>XML Generator - (s)FTP</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <link rel="stylesheet" href="css/xmlgenerator.css">
+        <script src="js/style.js"></script>
+        <script src="js/filesaver.js"></script>
+        <script src="js/xmlgenerator.js"></script>
+        
+    </head>
+    <body onload="initialize()">
+        <H1>(s)FTP Binding XML Generator</H1>
+        <form onsubmit="generateXML()">
+            <section class="itemGroups">
+                <h2 id="itemGroups1" onclick="showHide(this.id)">Project Details</h2>
+                <section class="items">      
+                    <div class="col col-2">
+                        <fieldset>
+                            <label for="project">Project Name</label>
+                            <input type="text" name="project" id="project" required>
+                        </fieldset>
+                    </div>       
+                    <div class="col col-2">
+                        <fieldset>
+                            <label for="sender">Sender</label>
+                            <input type="text" name="sender" id="sender" required>
+                        </fieldset>
+                        <fieldset>
+                            <label for="receiver">Receiver</label>
+                            <input type="text" name="receiver" id="receiver" required>
+                        </fieldset>
+                        <fieldset>
+                            <label for="docType">Document Type</label>
+                            <input type="text" name="docType" id="docType" required>
+                        </fieldset>
+                    </div>       
+                </section>
+            </section>
+
+            <section class="itemGroups">
+                <h2 id="itemGroups2" onclick="showHide(this.id)">Connection</h2>
+                <section class="items">
+                    <div class="col col-2">
+                        <fieldset>
+                            <label for="protocol">Protocol</label>
+                            <select name="protocol" id="protocol">
+                                <option value="sFTP">sFTP</option>
+                                <option value="FTP">FTP</option>
+                            </select>
+                        </fieldset>
+                        <fieldset>
+                            <label for="hostname">Hostname</label>
+                            <input type="text" name="hostname" id="hostname" required>
+                        </fieldset>
+                        <fieldset>
+                            <label for="port">Port</label>
+                            <input type="text" name="port" id="port" required>
+                        </fieldset>
+                        <fieldset>
+                            <label for="user">User</label>
+                            <input type="text" name="user" id="user" required>
+                        </fieldset>
+                        <fieldset>
+                            <label for="password">Password</label>
+                            <input type="text" name="password" id="password" required>
+                        </fieldset>
+                    </div>
+                    <div class="col col-2">
+                        <fieldset>
+                            <label for="connectionTimeout">Connection Timeout</label>
+                            <input type="text" name="connectionTimeout" id="connectionTimeout" value="300" required>
+                        </fieldset>
+                        <fieldset>
+                            <label for="reconnectCount">Reconnect Count</label>
+                            <input type="text" name="reconnectCount" id="reconnectCount" value="3" required>
+                        </fieldset>
+                        <fieldset>
+                            <label for="reconnectInterval">Reconnect Interval</label>
+                            <input type="text" name="reconnectInterval" id="reconnectInterval" value="5" required>
+                        </fieldset>
+                    </div>
+                </section>
+            </section>
+
+            <section class="itemGroups">
+                <h2 id="itemGroups3" onclick="showHide(this.id)">File</h2>
+                <section class="items">
+                    <div class="col col-1">
+                        <fieldset>
+                            <label for="ftpDir">FTP Directory</label>
+                            <input type="text" name="ftpDir" id="ftpDir" required>
+                        </fieldset>
+                    </div>
+                    <div class="col col-1">
+                        <fieldset>
+                            <label for="remoteProcDir">Remote Processing Directory</label>
+                            <input type="text" name="remoteProcDir" id="remoteProcDir" placeholder="optional">
+                        </fieldset>
+                    </div>
+                    <div class="col col-1">
+                        <fieldset>
+                            <label for="localDownloadDir">Local Download Directory</label>
+                            <input type="text" name="localDownloadDir" id="localDownloadDir" required>
+                        </fieldset>
+                    </div>
+                    <div class="col col-3">
+                        <fieldset>
+                            <label for="fileName">File Name</label>
+                            <input type="text" name="fileName" id="fileName" value="*.*" required>
+                        </fieldset>
+                    </div>
+                    <div class="col col-3">
+                        <fieldset>
+                            <label for="archiveFlagLocal">Archive Local Flag</label>
+                            <select name="archiveFlagLocal" id="archiveFlagLocal">
+                                <option value="false">false</option>
+                                <option value="true">true</option>
+                            </select>
+                        </fieldset>
+                        <fieldset>
+                            <label for="archiveLocalDir">Archive Local Directory</label>
+                            <input type="text" name="archiveLocalDir" id="archiveLocalDir" placeholder="optional">
+                        </fieldset>
+                    </div>
+                    <div class="col col-3">
+                        <fieldset>
+                            <label for="largeFileCheck">Large File Check</label>
+                            <select name="largeFileCheck" id="largeFileCheck">
+                                <option value="false">false</option>
+                                <option value="true">true</option>
+                            </select>
+                        </fieldset>
+                        <fieldset>
+                            <label for="filesizeLimit">File Size Limit</label>
+                            <input type="text" name="filesizeLimit" id="filesizeLimit" placeholder="optional">
+                        </fieldset>
+                    </div>
+                </section>
+            </section>
+
+            <section class="itemGroups">
+                <h2 id="itemGroups4" onclick="showHide(this.id)">Transport</h2>
+                <section class="items">
+                    <div class="col col-5">
+                        <fieldset>
+                            <label for="action">Archive Local Flag</label>
+                            <select name="action" id="action">
+                                <option value="MGET">MGET</option>
+                                <option value="GET">GET</option>
+                            </select>
+                        </fieldset>
+                    </div>
+                    <div class="col col-5">
+                        <fieldset>
+                            <label for="remoteFileAction">Archive Local Flag</label>
+                            <select name="remoteFileAction" id="remoteFileAction">
+                                <option value="DELETE">DELETE</option>
+                                <option value="KEEP">KEEP</option>
+                            </select>
+                        </fieldset>
+                    </div>
+                    <div class="col col-5">
+                        <fieldset>
+                            <label for="transferMode">Archive Local Flag</label>
+                            <select name="transferMode" id="transferMode">
+                                <option value="BINARY">BINARY</option>
+                                <option value="EDI">EDI</option>
+                            </select>
+                        </fieldset>
+                    </div>
+                    <div class="col col-5">
+                        <fieldset>
+                            <label for="transferType">Archive Local Flag</label>
+                            <select name="transferType" id="transferType">
+                                <option value="passive">passive</option>
+                                <option value="active">active</option>
+                            </select>
+                        </fieldset>
+                    </div>
+                    <div class="col col-5">
+                        <fieldset>
+                            <label for="encoding">Encoding</label>
+                            <input type="text" name="encoding" id="encoding" value="ISO8859_1" required>
+                        </fieldset>
+                    </div>
+                </section>
+            </section>
+
+            <section class="itemGroups opt">
+                <h2 id="itemGroups5" onclick="showHide(this.id)">Callbacks</h2>
+                <section class="items optional">
+                    <div class="col col-1">
+                        <fieldset>
+                            <label for="initial">Initial</label>
+                            <input type="text" name="initial" id="initial" placeholder="optional">
+                        </fieldset>
+                        <fieldset>
+                    </div>
+                    <div class="col col-1">
+                        <fieldset>
+                            <label for="preProcess">Pre-Process</label>
+                            <input type="text" name="preProcess" id="preProcess" placeholder="optional">
+                        </fieldset>
+                    </div>
+                    <div class="col col-1">
+                        <fieldset>
+                            <label for="postProcess">Post Process</label>
+                            <input type="text" name="postProcess" id="postProcess" placeholder="optional">
+                        </fieldset>
+                    </div>
+                    <div class="col col-1">
+                        <fieldset>
+                            <label for="finall">Final</label>
+                            <input type="text" name="finall" id="finall" placeholder="optional">
+                        </fieldset>
+                    </div>
+                    <div class="col col-1">
+                        <fieldset>
+                            <label for="error">Error</label>
+                            <input type="text" name="error" id="error" placeholder="optional">
+                        </fieldset>
+                    </div>
+                    <div class="col col-1">
+                        <fieldset>
+                            <label for="largeFile">Large File</label>
+                            <input type="text" name="largeFile" id="largeFile" placeholder="optional">
+                        </fieldset>
+                    </div>
+                    <div class="col col-1">
+                        <fieldset>
+                            <label for="postDirList">Post Directory List</label>
+                            <input type="text" name="postDirList" id="postDirList" placeholder="optional">
+                        </fieldset>
+                    </div>
+                    <div class="col col-1">
+                        <fieldset>
+                            <label for="postFileLoad">Post File Load</label>
+                            <input type="text" name="postFileLoad" id="postFileLoad" placeholder="optional">
+                        </fieldset>
+                    </div>
+                </section>
+            </section>
+
+            <section class="itemGroups opt">
+                <h2 id="itemGroups6" onclick="showHide(this.id)">PGP</h2>
+                <section class="items optional">
+                    <div class="col col-4">
+                        <fieldset>
+                            <label for="pgpFlag">pgpFlag</label>
+                            <select name="pgpFlag" id="pgpFlag">
+                                <option value="false">false</option>
+                                <option value="true">true</option>
+                            </select>
+                        </fieldset>
+                        <fieldset>
+                            <label for="type">Type</label>
+                            <input type="text" name="type" id="type" placeholder="optional">
+                        </fieldset>
+                    </div>
+                    <div class="col col-4">
+                        <fieldset>
+                            <label for="key">Key</label>
+                            <input type="text" name="key" id="key" placeholder="optional">
+                        </fieldset>
+                        <fieldset>
+                            <label for="pgpPassword">Password</label>
+                            <input type="text" name="pgpPassword" id="pgpPassword" placeholder="optional">
+                        </fieldset>
+                        <fieldset>
+                            <label for="alghorithm">Algorithm</label>
+                            <input type="text" name="alghorithm" id="alghorithm" placeholder="optional">
+                        </fieldset>
+                    </div>
+                    <div class="col col-2">
+                        <fieldset>
+                            <label for="secretKeyFile">Secret Key File</label>
+                            <input type="text" name="secretKeyFile" id="secretKeyFile" placeholder="optional">
+                        </fieldset>
+                        <fieldset>
+                            <label for="publicKeyFile">Public Key File</label>
+                            <input type="text" name="publicKeyFile" id="publicKeyFile" placeholder="optional">
+                        </fieldset>
+                    </div>
+                </section>
+            </section>
+
+            <section class="itemGroups opt">
+                <h2 id="itemGroups7" onclick="showHide(this.id)">sFTP</h2>
+                <section class="items optional">
+                    <div class="col col-3">
+                        <fieldset>
+                            <label for="privateKey">Private Key</label>
+                            <input type="text" name="privateKey" id="privateKey" placeholder="optional">
+                        </fieldset>
+                        <fieldset>
+                            <label for="privateKeyPassword">Private Key Password</label>
+                            <input type="text" name="privateKeyPassword" id="privateKeyPassword" placeholder="optional">
+                        </fieldset>
+                    </div>
+                    <div class="col col-3">
+                        <fieldset>
+                            <label for="knownHosts">Known Hosts</label>
+                            <input type="text" name="knownHosts" id="knownHosts" placeholder="optional">
+                        </fieldset>
+                        <fieldset>
+                            <label for="strictHostKeyChecking">Strict Host Key Checking</label>
+                            <input type="text" name="strictHostKeyChecking" id="strictHostKeyChecking" placeholder="optional">
+                        </fieldset>
+                    </div>
+                    <div class="col col-3">
+                        <fieldset>
+                            <label for="httpProxy">HTTP Proxy</label>
+                            <select name="httpProxy" id="httpProxy">
+                                <option value="N">N</option>
+                                <option value="Y">Y</option>
+                            </select>
+                        </fieldset>
+                        <fieldset>
+                            <label for="socksProxy">Socks Proxy</label>
+                            <select name="socksProxy" id="socksProxy">
+                                <option value="N">N</option>
+                                <option value="Y">Y</option>
+                            </select>
+                        </fieldset>
+                    </div>
+                </section>
+            </section>
+
+            <section class="itemGroups opt">
+                <h2 id="itemGroups8" onclick="showHide(this.id)">Counter</h2>
+                <section class="items optional">
+                    <div class="col col-1">
+                        <fieldset>
+                            <label for="counter">Counter</label>
+                            <input type="text" name="counter" id="counter" placeholder="optional">
+                        </fieldset>
+                    </div>
+                </section>
+            </section>
+
+            <section class="itemGroups">
+                <h2 id="itemGroups9" onclick="showHide(this.id)">Poller</h2>
+                <section class="items">
+                    <div class="col col-3">
+                        <fieldset>
+                            <label for="applicationID">Application ID</label>
+                            <input type="text" name="applicationID" id="applicationID" required>
+                        </fieldset>
+                    </div>
+                    <div class="col col-3">
+                        <fieldset>
+                            <label for="enabledCron">Enabled Cron</label>
+                            <select name="enabledCron" id="enabledCron">
+                                <option value="true">true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </fieldset>
+                        <fieldset>
+                            <label for="clusterAware">Cluster Aware</label>
+                            <select name="clusterAware" id="clusterAware">
+                                <option value="true">true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </fieldset>
+                        <fieldset>
+                            <label for="clusterAwareScope">Cluster Aware Scope</label>
+                            <select name="clusterAwareScope" id="clusterAwareScope">
+                                <option value="GLOBAL">GLOBAL</option>
+                                <option value="LOCAL">LOCAL</option>
+                            </select>
+                        </fieldset>
+                    </div>
+                    <div class="col col-3">
+                        <fieldset>
+                            <label for="priority">Priority</label>
+                            <input type="text" name="priority" id="priority" value="0">
+                        </fieldset>
+                        <fieldset>
+                            <label for="serverRole">Server Role</label>
+                            <input type="text" name="serverRole" id="serverRole" value="CL1" required>
+                        </fieldset>
+                        <fieldset>
+                            <label for="groupName">Group Name</label>
+                            <input type="text" name="groupName" id="groupName" required>
+                        </fieldset>
+                    </div>
+                </section>
+            </section>
+
+            <div class="submit">
+                <input type="submit" value="Reset">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </body>
+</html>

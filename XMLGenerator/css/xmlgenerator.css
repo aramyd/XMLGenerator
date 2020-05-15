@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
+* {
+    box-sizing: border-box;
+    text-align: left;
+}
+
+html,body {
+    font-family: 'Source Code Pro', monospace;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+form {
+    margin: 0 auto;
+    width: 90%;
+}
+
+.itemGroups {
+    border-radius: 25px;
+    background-color: rgba(230, 181, 21, 0.404);
+    /* background-color: rgba(65, 218, 205, 0.5); */
+}
+
+.col {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.optional {
+    display: none;
+}
+
+.opt {
+    background-color: transparent;
+}
+
+input[type="submit"] {
+    margin-top: 2rem;
+}
+
+.submit {
+    float: right;
+}
+
+/* typography */
+.items {
+    font-size: 0;
+}
+h2 {
+    font-size: 1.5rem;
+    background-color: rgba(230, 181, 21, 0.904);
+    /* background-color: rgba(65, 218, 205, 1); */
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    padding-left: 1rem;;
+}
+fieldset {
+    display: block;
+    clear: both;
+    border: none;
+    /* background-color: lawngreen; */
+    font-size: 1rem;
+}
+
+label,input,select {
+    font-size: 1rem;
+}
+label {
+    vertical-align: text-top;
+    text-align: right;
+    margin: 0;
+    width: 20%;
+    float: left;
+    margin-right: 1rem;
+}
+
+input[type="text"],select {
+    display: inline-block;
+    width: 75%; 
+}
+
+/* columns */
+.col-1 {
+    width:100%;
+}
+
+.col-2 {
+    width: 50%;
+}
+
+.col-3 {
+    width: 33.33%;
+}
+
+.col-4 {
+    width: 25%;
+}
+.col-5 {
+    width: 20%;
+}
